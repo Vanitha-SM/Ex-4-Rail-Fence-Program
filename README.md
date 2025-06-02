@@ -18,8 +18,35 @@ STEP-3: Now read the keyword depending on the number of columns of the plain tex
 STEP-4: Arrange the characters of the keyword in sorted order and the corresponding columns of the plain text.
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
-# PROGRAM
+# PROGRAM:
+```
+def encrypt_rail_fence(message, rails):
+    rail = [['\n' for _ in range(len(message))] for _ in range(rails)]
+    row, direction = 0, 1
 
-# OUTPUT
+    for col in range(len(message)):
+        rail[row][col] = message[col]
+        row += direction
 
-# RESULT
+        if row == 0 or row == rails - 1:
+            direction *= -1
+    encrypted = ''
+    for r in rail:
+        for ch in r:
+            if ch != '\n':
+                encrypted += ch
+
+    return encrypted
+message = input("Enter a Secret Message: ").replace(" ", "")
+rails = int(input("Enter number of rails: "))
+cipher_text = encrypt_rail_fence(message, rails)
+print("Encrypted text:", cipher_text)
+
+```
+
+# OUTPUT:
+![image](https://github.com/user-attachments/assets/d4e2b9ac-e519-48f8-beb1-2f69975c02b9)
+
+
+# RESULT:
+The program is executed successfully
